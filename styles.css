@@ -49,8 +49,8 @@ ul { list-style: none; }
 .icon-btn { display: grid; place-items: center; color: #d4d7dd; }
 .icon-btn .ic { width: 20px; height: 20px; }
 .nav-signin { font-size: 13.5px; font-weight: 500; color: #d4d7dd; }
-.btn-pro { background: #fff; color: #0a0b0e; font-weight: 600; font-size: 13.5px; padding: 9px 18px; border-radius: 9px; transition: transform .15s, box-shadow .15s; }
-.btn-pro:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255, 255, 255, .14); }
+.btn-pro { background: var(--brand-grad); color: #fff; font-weight: 600; font-size: 13.5px; padding: 9px 18px; border-radius: 9px; transition: transform .15s, box-shadow .15s; }
+.btn-pro:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(129, 140, 248, .35); }
 
 /* Hero */
 .hero {
