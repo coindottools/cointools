@@ -12,7 +12,7 @@
   --orange: #f59e0b;
   --blue: #60a5fa;
   --radius: 12px;
-  --brand-grad: linear-gradient(90deg, #059669 0%, #0d9488 35%, #7c3aed 100%);
+  --brand-grad: linear-gradient(90deg, #0f8a74 0%, #1f7a8c 50%, #4c4fb8 100%);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
