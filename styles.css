@@ -12,7 +12,7 @@
   --orange: #f59e0b;
   --blue: #60a5fa;
   --radius: 12px;
-  --brand-grad: linear-gradient(90deg, #34d399 0%, #2dd4bf 30%, #a78bfa 75%, #c084fc 100%);
+  --brand-grad: linear-gradient(90deg, #059669 0%, #0d9488 35%, #7c3aed 100%);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,7 +50,7 @@ ul { list-style: none; }
 .icon-btn .ic { width: 20px; height: 20px; }
 .nav-signin { font-size: 13.5px; font-weight: 500; color: #d4d7dd; }
 .btn-pro { background: var(--brand-grad); color: #fff; font-weight: 600; font-size: 13.5px; padding: 9px 18px; border-radius: 9px; transition: transform .15s, box-shadow .15s; }
-.btn-pro:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(45, 212, 191, .28), 0 6px 22px rgba(167, 139, 250, .22); }
+.btn-pro:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(5, 150, 105, .3), 0 6px 22px rgba(124, 58, 237, .25); }
 
 /* Hero */
 .hero {
