@@ -40,17 +40,6 @@ function barsSvg(svg, heights, colorFn, { w = 64, h = 44, gap = 2 } = {}) {
   ).join("");
 }
 
-// Explore card background decorations.
-document.querySelectorAll(".ex-bg[data-deco]").forEach((svg) => {
-  const color = getComputedStyle(svg.closest(".ex")).getPropertyValue("--c").trim();
-  const seed = Number(svg.dataset.seed);
-  if (svg.dataset.deco === "area") areaSvg(svg, walk(seed, 40, 0.5, 3), color, { opacity: 0.45 });
-  else {
-    const r = rng(seed);
-    barsSvg(svg, Array.from({ length: 16 }, (_, i) => 0.25 + r() * 0.5 + i * 0.015), () => color, { w: 100, h: 60, gap: 3 });
-  }
-});
-
 // Specialized tool mini visualizations.
 document.querySelectorAll("svg.viz").forEach((svg) => {
   const color = svg.dataset.color;
