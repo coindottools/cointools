@@ -83,7 +83,6 @@ h1 { font-size: clamp(38px, 5.6vw, 58px); font-weight: 700; letter-spacing: -.03
 .section { margin-top: 30px; }
 .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; color: #d4d7dd; margin-bottom: 12px; }
 .eyebrow.sm { font-size: 9.5px; color: var(--muted); margin-bottom: 8px; }
-.eyebrow-sub { margin-left: 6px; letter-spacing: 0; font-weight: 400; color: var(--muted); font-size: 12px; }
 .section-head { display: flex; justify-content: space-between; align-items: baseline; }
 .view-all { display: flex; align-items: center; gap: 8px; color: var(--blue); font-size: 12.5px; }
 .view-all .ic { width: 14px; height: 14px; }
@@ -224,5 +223,4 @@ h1 { font-size: clamp(38px, 5.6vw, 58px); font-weight: 700; letter-spacing: -.03
   .big-price { font-size: 22px; } .big-price em { font-size: 18px; }
   .dev-copy h3 { font-size: 24px; }
   .section-head { flex-wrap: wrap; gap: 4px 12px; margin-bottom: 8px; }
-  .eyebrow-sub { display: block; margin: 4px 0 0; }
 }
