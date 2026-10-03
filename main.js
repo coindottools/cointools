@@ -164,69 +164,6 @@ document.querySelectorAll(".code-tabs button").forEach((b) =>
   g.innerHTML = out;
 })();
 
-// Hero globe: dark planet limb with atmosphere and scattered city lights.
-(function globe() {
-  const canvas = document.querySelector(".globe");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  const r = rng(2026);
-  const lights = Array.from({ length: 4000 }, () => ({ a: r(), d: r(), s: r() }));
-
-  function draw() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, w, h);
-
-    const R = Math.max(w * 1.1, 1000);
-    const cx = w * 0.62, cy = R + h * 0.58;
-
-    // Atmosphere glow
-    const atm = ctx.createRadialGradient(cx, cy, R * 0.96, cx, cy, R * 1.12);
-    atm.addColorStop(0, "rgba(59,130,246,.0)");
-    atm.addColorStop(0.35, "rgba(59,130,246,.28)");
-    atm.addColorStop(1, "rgba(59,130,246,0)");
-    ctx.fillStyle = atm;
-    ctx.fillRect(0, 0, w, h);
-
-    // Planet body
-    const body = ctx.createRadialGradient(cx + R * 0.2, cy - R * 0.9, R * 0.1, cx, cy, R);
-    body.addColorStop(0, "#0d1626");
-    body.addColorStop(1, "#05070b");
-    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.fillStyle = body; ctx.fill();
-
-    // Rim light
-    ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI * 1.05, Math.PI * 1.95);
-    ctx.strokeStyle = "rgba(147,197,253,.55)"; ctx.lineWidth = 1.2; ctx.stroke();
-
-    // City lights: clustered near the visible upper part of the planet.
-    for (const p of lights) {
-      const ang = Math.PI * (1.3 + p.a * 0.5);
-      const depth = Math.pow(p.d, 2.2) * 0.06;
-      const x = cx + Math.cos(ang) * R * (1 - depth);
-      const y = cy + Math.sin(ang) * R * (1 - depth);
-      if (y < 0 || y > h || x < 0 || x > w) continue;
-      const cluster = Math.sin(ang * 23) * Math.cos(ang * 9) > 0.1;
-      if (!cluster && p.s > 0.25) continue;
-      const alpha = (0.3 + p.s * 0.7) * (1 - depth * 10);
-      ctx.fillStyle = p.s > 0.85 ? `rgba(255,214,150,${alpha})` : `rgba(255,170,90,${alpha * 0.8})`;
-      ctx.fillRect(x, y, p.s > 0.9 ? 1.6 : 1, p.s > 0.9 ? 1.6 : 1);
-    }
-
-    // Faint stars above the planet
-    const sr = rng(7);
-    for (let i = 0; i < 90; i++) {
-      const x = sr() * w, y = sr() * h * 0.7;
-      ctx.fillStyle = `rgba(255,255,255,${0.08 + sr() * 0.25})`;
-      ctx.fillRect(x, y, 1, 1);
-    }
-  }
-  draw();
-  let t;
-  window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(draw, 120); });
-})();
-
 // Search: ⌘K / Ctrl+K and "/" focus the box; example chips fill it.
 const search = document.getElementById("search");
 document.addEventListener("keydown", (e) => {
