@@ -151,19 +151,6 @@ document.querySelectorAll(".code-tabs button").forEach((b) =>
   })
 );
 
-// Isometric floor grid for the developer section.
-(function isoGrid() {
-  const g = document.querySelector(".iso-grid");
-  if (!g) return;
-  const tw = 22, th = 12;
-  let out = "";
-  for (let i = 0; i < 6; i++) for (let j = 0; j < 6; j++) {
-    const x = 40 + (i - j) * tw + 60, y = 70 + (i + j) * th;
-    out += `<path d="M${x} ${y} l${tw} ${th} l${-tw} ${th} l${-tw} ${-th}Z"/>`;
-  }
-  g.innerHTML = out;
-})();
-
 // Search: ⌘K / Ctrl+K and "/" focus the box; example chips fill it.
 const search = document.getElementById("search");
 document.addEventListener("keydown", (e) => {
