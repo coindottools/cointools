@@ -215,7 +215,7 @@
   const links = [...document.querySelectorAll('.tk-side a[href^="#"]')].filter((a) => a.getAttribute("href").length > 1);
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
-      if (!en.isIntersecting) return;
+      if (!en.isIntersecting || scrollY < 120) return;
       links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === `#${en.target.id}`));
     });
   }, { rootMargin: "-40% 0px -55% 0px" });
