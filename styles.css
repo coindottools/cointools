@@ -12,6 +12,7 @@
   --orange: #f59e0b;
   --blue: #60a5fa;
   --radius: 12px;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
   --brand-end: #4c4fb8;
   --brand-grad: linear-gradient(90deg, #0f8a74 0%, #1f7a8c 50%, var(--brand-end) 100%);
 }
@@ -20,7 +21,7 @@
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   background: var(--bg); color: var(--text);
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 14px; line-height: 1.45; -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -72,7 +73,7 @@ h1 { font-size: clamp(38px, 5.6vw, 58px); font-weight: 700; letter-spacing: -.03
 .search-ic { width: 20px; height: 20px; color: #c6cad1; }
 .search input { flex: 1; height: 100%; background: none; border: 0; outline: 0; padding: 0 14px; font-size: 14.5px; }
 .search input::placeholder { color: var(--dim); }
-.kbd { padding: 4px 9px; border: 1px solid var(--border-2); border-radius: 6px; color: var(--muted); font-family: inherit; font-size: 11.5px; background: #0f131b; }
+.kbd { padding: 4px 9px; border: 1px solid var(--border-2); border-radius: 6px; color: var(--muted); font-family: var(--mono); font-size: 11px; background: #0f131b; }
 .kbd span { margin-left: 4px; }
 .try { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 16px; font-size: 11.5px; color: var(--muted); }
 .try span { margin-right: 4px; }
@@ -196,7 +197,7 @@ h1 { font-size: clamp(38px, 5.6vw, 58px); font-weight: 700; letter-spacing: -.03
 .code-tabs { display: flex; gap: 2px; padding: 0 10px; border-bottom: 1px solid var(--border); }
 .code-tabs button { padding: 8px 8px; font-size: 11px; color: var(--muted); border-bottom: 1.5px solid transparent; margin-bottom: -1px; }
 .code-tabs button.on { color: #fff; border-color: #fff; }
-.code pre { margin: 0; padding: 12px 14px; font: 11.5px/1.6 "JetBrains Mono", ui-monospace, Menlo, monospace; color: #d4d7dd; overflow-x: auto; min-height: 140px; }
+.code pre { margin: 0; padding: 12px 14px; font: 11.5px/1.6 var(--mono); color: #d4d7dd; overflow-x: auto; min-height: 140px; }
 .code .k { color: #93c5fd; } .code .s { color: #fcd34d; } .code .n { color: #fb923c; } .code .c { color: var(--dim); }
 
 .footer { color: var(--dim); font-size: 12px; padding-top: 28px; padding-bottom: 32px; }
@@ -224,3 +225,8 @@ h1 { font-size: clamp(38px, 5.6vw, 58px); font-weight: 700; letter-spacing: -.03
   .dev-copy h3 { font-size: 24px; }
   .section-head { flex-wrap: wrap; gap: 4px 12px; margin-bottom: 8px; }
 }
+
+/* Techy accents: monospace for labels, data and controls */
+.eyebrow, .try, .tf button, .y-axis, .x-axis, .demo-stats dt, .code-tabs button, .tcard .compare { font-family: var(--mono); }
+.eyebrow { letter-spacing: .08em; }
+.big-price, .demo-stats dd, .insights b, .protocols b { font-variant-numeric: tabular-nums; }
