@@ -152,8 +152,12 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && document.activeElement === search) search.blur();
 });
 document.querySelectorAll("[data-focus-search]").forEach((b) => b.addEventListener("click", () => search.focus()));
+// Searching opens the token report (template for now; see token.html).
+document.getElementById("hero-search").addEventListener("submit", (e) => {
+  if (!search.value.trim()) { e.preventDefault(); search.focus(); }
+});
 document.querySelectorAll("[data-try]").forEach((b) =>
-  b.addEventListener("click", () => { search.value = b.dataset.try; search.focus(); })
+  b.addEventListener("click", () => { location.href = `token.html?q=${encodeURIComponent(b.dataset.try)}`; })
 );
 
 document.getElementById("year").textContent = new Date().getFullYear();

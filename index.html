@@ -73,9 +73,9 @@
     <section class="hero">
       <div class="container hero-inner">
         <p class="sub">Real-time intelligence for tokens, wallets, contracts and transactions.</p>
-        <form class="search" role="search" onsubmit="return false">
+        <form class="search" role="search" id="hero-search" action="token.html">
           <svg class="ic search-ic"><use href="#i-search"/></svg>
-          <input id="search" type="text" autocomplete="off" spellcheck="false"
+          <input id="search" name="q" type="text" autocomplete="off" spellcheck="false"
                  placeholder="Search a token, wallet, contract or transaction..." aria-label="Search" />
           <kbd class="kbd">⌘ <span>K</span></kbd>
         </form>
@@ -93,7 +93,7 @@
     <section class="container section" id="explore">
       <h2 class="eyebrow">EXPLORE BY TYPE</h2>
       <div class="explore">
-        <a href="#" class="ex" style="--c:#22c55e">
+        <a href="token.html" class="ex" style="--c:#22c55e">
           <div class="ex-head">
             <span class="ex-ic"><svg class="ic"><use href="#i-db"/></svg></span>
             <div><strong>Token <svg class="ic arr"><use href="#i-arrow"/></svg></strong><small>Analyze any asset</small></div>

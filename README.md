@@ -17,4 +17,7 @@ python3 -m http.server 8000
 - `styles.css`: dark theme, layout, and responsive breakpoints
 - `main.js`: placeholder charts (demo chart with timeframe tabs, card decorations, mini tool visuals), hero globe canvas, code-sample tabs, and search shortcuts (⌘K and `/`)
 
-Market numbers on the landing page are placeholders for now.
+- `token.html` + `token.css` + `token.js`: token report page (opened by searching on the homepage, e.g. `token.html?q=0x...`)
+- `token-data.js`: sample token report (PEPE). Its shape is the planned API response, so going live means swapping this object for a fetch.
+
+All numbers are placeholder/sample data for now.

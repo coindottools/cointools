@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Token Analyzer — coin.tools</title>
+  <meta name="description" content="Token intelligence: price, liquidity, holders, smart money and contract risk." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="token.css" />
+</head>
+<body class="token-page">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+      <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol>
+      <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="15" rx="3"/><path d="M3 9h12a2 2 0 0 0 0-4"/><path d="M21 11h-4a2 2 0 0 0 0 4h4"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></symbol>
+      <symbol id="i-swap" viewBox="0 0 24 24"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></symbol>
+      <symbol id="i-line" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-coins" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/></symbol>
+      <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+      <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+      <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+      <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+      <symbol id="i-dollar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></symbol>
+      <symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></symbol>
+      <symbol id="i-whale" viewBox="0 0 24 24"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z"/><path d="M18 12v.5"/><path d="M16 17.93a9.77 9.77 0 0 1 0-11.86"/><path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33"/></symbol>
+      <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+      <symbol id="i-filter" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></symbol>
+      <symbol id="i-trend" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+      <symbol id="i-calc" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h8"/><path d="M16 14v4"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></symbol>
+      <symbol id="i-pct" viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+      <symbol id="i-cal" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></symbol>
+      <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
+      <symbol id="i-gas" viewBox="0 0 24 24"><path d="M3 22h12"/><path d="M4 9h10"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0V9.83a2 2 0 0 0-.59-1.42L18 5"/></symbol>
+      <symbol id="i-eth" viewBox="0 0 24 24"><path d="M12 2 5 12.2l7 4.1 7-4.1L12 2Z"/><path d="m5 13.8 7 8.2 7-8.2-7 4.1-7-4.1Z"/></symbol>
+      <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.5 2.3a.5.5 0 0 1 1 0l2.3 4.7a2 2 0 0 0 1.5 1.1l5.2.8a.5.5 0 0 1 .3.9l-3.8 3.6a2 2 0 0 0-.6 1.8l.9 5.2a.5.5 0 0 1-.8.6l-4.6-2.5a2 2 0 0 0-1.9 0l-4.6 2.5a.5.5 0 0 1-.8-.6l.9-5.2a2 2 0 0 0-.6-1.8L1.2 9.8a.5.5 0 0 1 .3-.9l5.2-.8a2 2 0 0 0 1.5-1.1z"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+      <symbol id="i-ext" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="M9.94 14.06 4 16l5.94 1.94L12 24l2.06-6.06L20 16l-5.94-1.94L12 8z" transform="translate(0 -6)"/><path d="M19 3v4"/><path d="M21 5h-4"/></symbol>
+      <symbol id="i-brain" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16"/><path d="M20 4 4 20"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7 9h10"/><path d="M7 13h6"/><path d="M5 3h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-5l-4 3v-3H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="nav">
+    <div class="nav-inner tk-nav">
+      <a href="index.html" class="logo">coin<span class="logo-dot">.</span>tools</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html#explore">Tools</a>
+        <a href="#">Markets</a>
+        <a href="#">Watchlist</a>
+        <a href="#">Resources</a>
+        <a href="#">Pricing</a>
+      </nav>
+      <form class="nav-search" role="search" id="nav-search">
+        <svg class="ic"><use href="#i-search"/></svg>
+        <input id="search" type="text" autocomplete="off" spellcheck="false" placeholder="Search token, wallet, contract or transaction..." aria-label="Search" />
+        <kbd class="kbd">⌘ <span>K</span></kbd>
+      </form>
+      <a href="#" class="icon-btn user-btn" aria-label="Account"><svg class="ic"><use href="#i-user"/></svg></a>
+    </div>
+  </header>
+
+  <div class="tk-layout">
+    <aside class="tk-side" aria-label="Token sections">
+      <h4>ANALYSIS</h4>
+      <a href="#overview" class="on"><svg class="ic"><use href="#i-grid"/></svg>Overview</a>
+      <a href="#insights"><svg class="ic"><use href="#i-spark"/></svg>Key Insights <b class="count">3</b></a>
+      <a href="#"><svg class="ic"><use href="#i-wallet"/></svg>Wallet Analysis</a>
+      <a href="#network"><svg class="ic"><use href="#i-users"/></svg>Holder Connections</a>
+      <a href="#smart"><svg class="ic"><use href="#i-brain"/></svg>Smart Money</a>
+      <a href="#liquidity"><svg class="ic"><use href="#i-drop"/></svg>Liquidity &amp; Exit Risk</a>
+      <a href="#contract"><svg class="ic"><use href="#i-file"/></svg>Contract Analysis</a>
+      <a href="#timeline"><svg class="ic"><use href="#i-clock"/></svg>Token Timeline</a>
+      <a href="#chart"><svg class="ic"><use href="#i-line"/></svg>Markets &amp; Trading</a>
+      <a href="#"><svg class="ic"><use href="#i-msg"/></svg>News &amp; Social</a>
+      <a href="#"><svg class="ic"><use href="#i-layers"/></svg>Similar Tokens</a>
+      <h4>TOOLS</h4>
+      <a href="#"><svg class="ic"><use href="#i-filter"/></svg>Token Screener</a>
+      <a href="#"><svg class="ic"><use href="#i-swap"/></svg>Token Compare</a>
+      <a href="#"><svg class="ic"><use href="#i-wallet"/></svg>Wallet Analyzer</a>
+      <a href="#"><svg class="ic"><use href="#i-box"/></svg>Transaction Decoder</a>
+      <a href="#"><svg class="ic"><use href="#i-shield"/></svg>Risk Analyzer</a>
+      <a href="index.html#calculators"><svg class="ic"><use href="#i-calc"/></svg>All Calculators <svg class="ic chev-r"><use href="#i-chev-r"/></svg></a>
+    </aside>
+
+    <main class="tk-main" id="overview">
+      <div class="crumbs-row">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><svg class="ic"><use href="#i-chev-r"/></svg><a href="#">Token Analyzer</a><svg class="ic"><use href="#i-chev-r"/></svg><span data-bind="symbol"></span></nav>
+        <div class="crumb-actions">
+          <button class="sq-btn" aria-label="Add to watchlist"><svg class="ic"><use href="#i-star"/></svg></button>
+          <button class="btn-outline">Trade <svg class="ic"><use href="#i-chev"/></svg></button>
+        </div>
+      </div>
+
+      <section class="tk-head">
+        <div class="tk-id">
+          <div class="tk-logo" data-bind="logo"></div>
+          <div>
+            <div class="tk-name"><h1 data-bind="name"></h1><span class="muted" data-bind="symbol"></span>
+              <svg class="ic sm muted"><use href="#i-lock"/></svg><span class="chain-dot" title="Ethereum"><svg class="ic"><use href="#i-eth"/></svg></span></div>
+            <div class="tags" id="tags"></div>
+            <div class="addr-row">
+              <span class="addr"><svg class="ic"><use href="#i-file"/></svg><span id="addr"></span></span>
+              <button class="mini-btn" id="copy-addr" aria-label="Copy address"><svg class="ic"><use href="#i-copy"/></svg></button>
+              <a class="mini-btn" id="explorer" target="_blank" rel="noopener" aria-label="Open in explorer"><svg class="ic"><use href="#i-ext"/></svg></a>
+            </div>
+          </div>
+        </div>
+        <div class="tk-market">
+          <div class="tk-price"><span id="price"></span> <em id="price-chg"></em></div>
+          <div class="tk-stats" id="head-stats"></div>
+        </div>
+      </section>
+
+      <section class="panel analysis" id="insights">
+        <div class="an-top">
+          <div class="an-label"><svg class="ic"><use href="#i-spark"/></svg>COIN.TOOLS ANALYSIS <span class="ai-pill">● AI POWERED</span><span class="sample-pill" id="sample-pill">EXAMPLE DATA</span></div>
+          <div class="an-meta"><span id="updated"></span><button class="btn-outline sm"><svg class="ic"><use href="#i-share"/></svg>Share</button></div>
+        </div>
+        <div class="an-body">
+          <div>
+            <h2 id="an-headline"></h2>
+            <p id="an-summary"></p>
+          </div>
+          <div class="score-card">
+            <div class="score-top">
+              <div><small>COIN SCORE</small><div class="score-num"><b id="score"></b> <span>/ 100</span></div></div>
+              <div class="score-ring" id="score-ring"><b id="score-ring-num"></b></div>
+            </div>
+            <ul class="score-list" id="score-list"></ul>
+          </div>
+        </div>
+        <div class="insight-grid" id="insight-grid"></div>
+      </section>
+
+      <div class="row-2">
+        <section class="panel" id="chart">
+          <div class="panel-head">
+            <h3>Price &amp; Volume</h3>
+            <div class="tf" id="tk-tf"><button>1D</button><button class="on">7D</button><button>30D</button><button>90D</button><button>1Y</button></div>
+          </div>
+          <div class="pv-wrap">
+            <div class="pv-y" id="pv-y"></div>
+            <svg class="pv-chart" id="pv-chart" preserveAspectRatio="none" aria-label="Price and volume chart"></svg>
+            <div class="pv-x" id="pv-x"></div>
+          </div>
+          <div class="legend"><span><i class="g"></i>Price (USD)</span><span><i class="b"></i>Volume (USD)</span></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head"><h3>Key Stats</h3><a href="#" class="link">Full Data</a></div>
+          <dl class="kv-list" id="key-stats"></dl>
+        </section>
+      </div>
+
+      <div class="row-3">
+        <section class="panel" id="network">
+          <div class="panel-head"><h3>Holder Network Analysis</h3></div>
+          <div class="net-wrap">
+            <svg class="net" id="net" viewBox="0 0 300 220" aria-label="Holder network graph"></svg>
+            <ul class="net-legend">
+              <li><i style="--c:#ef4444"></i>Top 10 Holders</li>
+              <li><i style="--c:#f59e0b"></i>Connected Wallets</li>
+              <li><i style="--c:#60a5fa"></i>Exchange</li>
+              <li><i style="--c:#64748b"></i>Other</li>
+            </ul>
+            <div class="net-callout" id="net-callout"></div>
+          </div>
+          <a href="#" class="btn-outline sm">View full wallet map <svg class="ic"><use href="#i-arrow"/></svg></a>
+        </section>
+
+        <section class="panel" id="smart">
+          <div class="panel-head"><h3>Smart Money Activity</h3><button class="btn-outline xs">7D <svg class="ic"><use href="#i-chev"/></svg></button></div>
+          <table class="tbl">
+            <thead><tr><th>Wallet</th><th>Action</th><th>Amount</th><th>Value</th><th>Time</th></tr></thead>
+            <tbody id="smart-body"></tbody>
+          </table>
+          <a href="#" class="btn-outline sm">View smart money analysis <svg class="ic"><use href="#i-arrow"/></svg></a>
+        </section>
+
+        <section class="panel" id="liquidity">
+          <div class="panel-head"><h3>Liquidity &amp; Exit Risk</h3><span class="dex-pill">DEX</span></div>
+          <div class="depth-wrap">
+            <div class="depth-y"><span>$2.4M</span><span>$1.6M</span><span>$0.8M</span><span>$0</span></div>
+            <svg class="depth" id="depth" viewBox="0 0 200 100" preserveAspectRatio="none" aria-label="Liquidity depth chart"></svg>
+          </div>
+          <div class="depth-x"><span>-5%</span><span>-2%</span><span>0</span><span>+2%</span><span>+5%</span></div>
+          <div class="legend"><span><i class="g"></i>Buy Depth</span><span><i class="r"></i>Sell Depth</span></div>
+          <dl class="kv-list tight" id="liq-stats"></dl>
+          <a href="#" class="btn-outline sm">View full liquidity analysis <svg class="ic"><use href="#i-arrow"/></svg></a>
+        </section>
+      </div>
+
+      <div class="row-3 last">
+        <section class="panel" id="timeline">
+          <div class="panel-head"><h3>Token Timeline</h3></div>
+          <ol class="timeline" id="timeline-list"></ol>
+          <a href="#" class="btn-outline sm">View full timeline <svg class="ic"><use href="#i-arrow"/></svg></a>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head"><h3>Recent Transactions</h3><a href="#" class="link">View All <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+          <table class="tbl">
+            <thead><tr><th>Time</th><th>Type</th><th>Amount</th><th>Value</th><th>From → To</th></tr></thead>
+            <tbody id="tx-body"></tbody>
+          </table>
+        </section>
+
+        <section class="panel" id="contract">
+          <div class="panel-head"><h3>Contract Analysis</h3></div>
+          <ul class="checks" id="checks"></ul>
+          <a href="#" class="btn-outline sm">View full contract analysis <svg class="ic"><use href="#i-arrow"/></svg></a>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="token-data.js"></script>
+  <script src="token.js"></script>
+</body>
+</html>
